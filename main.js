@@ -259,7 +259,7 @@ if (xhsBtn) {
   const API_KEY    = 'AIzaSyBOBhDWEX7gcIJpXTEwfBPlP3_MwNyetbo';
   const CHANNEL_ID = 'UCAYUBSXZo3mhr27Q95Qb3WQ';
   const grid = document.getElementById('video-grid');
-  if (!grid) return;
+  if (!grid) { console.error('video-grid not found'); return; }
 
   function formatDuration(iso) {
     const m = iso.match(/PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?/);
@@ -335,20 +335,23 @@ if (xhsBtn) {
     renderCards(items, {});
   }
 
+  // Show fallback immediately, then try to update with live data
+  showFallback();
+
   fetch(`https://www.googleapis.com/youtube/v3/search?key=${API_KEY}&channelId=${CHANNEL_ID}&part=snippet&order=date&maxResults=5&type=video`)
     .then(r => r.json())
     .then(data => {
-      if (!data.items?.length) { showFallback(); return; }
+      if (!data.items || !data.items.length) return;
       const ids = data.items.map(v => v.id.videoId).join(',');
       return fetch(`https://www.googleapis.com/youtube/v3/videos?key=${API_KEY}&id=${ids}&part=contentDetails,statistics`)
         .then(r => r.json())
         .then(details => {
           const map = {};
-          details.items?.forEach(v => { map[v.id] = v; });
+          if (details.items) details.items.forEach(v => { map[v.id] = v; });
           renderCards(data.items, map);
         });
     })
-    .catch(() => showFallback());
+    .catch(err => console.warn('YouTube API:', err));
 })();
 
 /* ============================================================
