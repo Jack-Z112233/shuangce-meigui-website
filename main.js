@@ -323,10 +323,23 @@ if (xhsBtn) {
     });
   }
 
+  const FALLBACK = [
+    { id: 'rmWfIFOXGpE', title: '闪迪美光超跌！底部即将到来',        published: '2026-03-28T17:15:39Z' },
+    { id: 'Sew7pOjQWw4', title: '一条新闻接一条，美股到底了吗？',    published: '2026-03-26T00:47:49Z' },
+    { id: 'KE5Tperziw4', title: '美股逆势赚50%！跟着这样买股票',      published: '2026-03-24T23:49:16Z' },
+    { id: '3P_NYZuSUnw', title: '恐慌中抄底黄金，单日涨幅25%',       published: '2026-03-24T00:40:35Z' },
+    { id: 'a3msQrNQmrg', title: '美股极端行情下的交易实录',           published: '2026-03-21T03:48:23Z' },
+  ];
+
+  function showFallback() {
+    const items = FALLBACK.map(v => ({ id: { videoId: v.id }, snippet: { title: v.title, publishedAt: v.published } }));
+    renderCards(items, {});
+  }
+
   fetch(`https://www.googleapis.com/youtube/v3/search?key=${API_KEY}&channelId=${CHANNEL_ID}&part=snippet&order=date&maxResults=5&type=video`)
     .then(r => r.json())
     .then(data => {
-      if (!data.items?.length) return;
+      if (!data.items?.length) { showFallback(); return; }
       const ids = data.items.map(v => v.id.videoId).join(',');
       return fetch(`https://www.googleapis.com/youtube/v3/videos?key=${API_KEY}&id=${ids}&part=contentDetails,statistics`)
         .then(r => r.json())
@@ -336,7 +349,7 @@ if (xhsBtn) {
           renderCards(data.items, map);
         });
     })
-    .catch(err => console.warn('YouTube API error:', err));
+    .catch(() => showFallback());
 })();
 
 /* ============================================================
