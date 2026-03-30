@@ -253,14 +253,91 @@ if (xhsBtn) {
 }
 
 /* ============================================================
-   VIDEO CARD → YOUTUBE LINK
+   YOUTUBE API — Auto-load latest videos
    ============================================================ */
-document.querySelectorAll('.video-card').forEach(card => {
-  card.addEventListener('click', () => {
-    window.open('https://www.youtube.com/@DanielWu-d1q/videos', '_blank');
-  });
-  card.style.cursor = 'pointer';
-});
+(function () {
+  const API_KEY    = 'AIzaSyBOBhDWEX7gcIJpXTEwfBPlP3_MwNyetbo';
+  const CHANNEL_ID = 'UCAYUBSXZo3mhr27Q95Qb3WQ';
+  const grid = document.getElementById('video-grid');
+  if (!grid) return;
+
+  function formatDuration(iso) {
+    const m = iso.match(/PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?/);
+    if (!m) return '';
+    const h = parseInt(m[1] || 0), min = parseInt(m[2] || 0), s = parseInt(m[3] || 0);
+    if (h > 0) return `${h}:${String(min).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+    return `${min}:${String(s).padStart(2,'0')}`;
+  }
+
+  function formatViews(n) {
+    if (n >= 1000000) return (n / 1000000).toFixed(1) + 'M';
+    if (n >= 1000)    return (n / 1000).toFixed(1) + 'K';
+    return n.toString();
+  }
+
+  function formatTimeAgo(dateStr) {
+    const days = Math.floor((Date.now() - new Date(dateStr)) / 86400000);
+    if (days === 0) return '今天';
+    if (days < 7)   return `${days}天前`;
+    if (days < 30)  return `${Math.floor(days / 7)}周前`;
+    if (days < 365) return `${Math.floor(days / 30)}个月前`;
+    return `${Math.floor(days / 365)}年前`;
+  }
+
+  function esc(str) {
+    return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+
+  function renderCards(items, detailsMap) {
+    grid.innerHTML = items.map((item, i) => {
+      const vid      = item.id.videoId;
+      const title    = item.snippet.title;
+      const published = item.snippet.publishedAt;
+      const detail   = detailsMap[vid];
+      const duration = detail ? formatDuration(detail.contentDetails.duration) : '';
+      const views    = detail?.statistics?.viewCount ? formatViews(parseInt(detail.statistics.viewCount)) : '';
+      const timeAgo  = formatTimeAgo(published);
+
+      return `
+        <div class="video-card${i === 0 ? ' featured' : ''}" data-vid="${vid}" style="cursor:pointer;opacity:0;transform:translateY(24px);transition:opacity 0.55s ease,transform 0.55s ease">
+          <div class="video-thumb">
+            <img src="https://img.youtube.com/vi/${vid}/maxresdefault.jpg" alt="${esc(title)}" class="thumb-img"
+                 onerror="this.src='https://img.youtube.com/vi/${vid}/hqdefault.jpg'"/>
+            <div class="play-btn"><svg viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg></div>
+            ${i === 0 ? '<div class="video-badge">最新</div>' : ''}
+            ${duration ? `<div class="video-duration">${duration}</div>` : ''}
+          </div>
+          <div class="video-info">
+            <h3>${esc(title)}</h3>
+            <div class="video-meta">
+              ${views ? `<span>${views} 次观看</span>` : ''}
+              <span>${timeAgo}</span>
+            </div>
+          </div>
+        </div>`;
+    }).join('');
+
+    grid.querySelectorAll('.video-card').forEach(card => {
+      card.addEventListener('click', () => window.open(`https://www.youtube.com/watch?v=${card.dataset.vid}`, '_blank'));
+      observer.observe(card);
+    });
+  }
+
+  fetch(`https://www.googleapis.com/youtube/v3/search?key=${API_KEY}&channelId=${CHANNEL_ID}&part=snippet&order=date&maxResults=5&type=video`)
+    .then(r => r.json())
+    .then(data => {
+      if (!data.items?.length) return;
+      const ids = data.items.map(v => v.id.videoId).join(',');
+      return fetch(`https://www.googleapis.com/youtube/v3/videos?key=${API_KEY}&id=${ids}&part=contentDetails,statistics`)
+        .then(r => r.json())
+        .then(details => {
+          const map = {};
+          details.items?.forEach(v => { map[v.id] = v; });
+          renderCards(data.items, map);
+        });
+    })
+    .catch(err => console.warn('YouTube API error:', err));
+})();
 
 /* ============================================================
    TICKER TAPE (floating price tags animation)
