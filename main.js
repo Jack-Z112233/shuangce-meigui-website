@@ -299,7 +299,7 @@ if (xhsBtn) {
       const timeAgo  = formatTimeAgo(published);
 
       return `
-        <div class="video-card${i === 0 ? ' featured' : ''}" data-vid="${vid}" style="cursor:pointer;opacity:0;transform:translateY(24px);transition:opacity 0.55s ease,transform 0.55s ease">
+        <div class="video-card${i === 0 ? ' featured' : ''}" data-vid="${vid}" style="cursor:pointer">
           <div class="video-thumb">
             <img src="https://img.youtube.com/vi/${vid}/maxresdefault.jpg" alt="${esc(title)}" class="thumb-img"
                  onerror="this.src='https://img.youtube.com/vi/${vid}/hqdefault.jpg'"/>
@@ -319,7 +319,6 @@ if (xhsBtn) {
 
     grid.querySelectorAll('.video-card').forEach(card => {
       card.addEventListener('click', () => window.open(`https://www.youtube.com/watch?v=${card.dataset.vid}`, '_blank'));
-      observer.observe(card);
     });
   }
 
