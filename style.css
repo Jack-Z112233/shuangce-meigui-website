@@ -142,6 +142,7 @@ img { display: block; max-width: 100%; }
 .btn-nav-yt:hover { background: rgba(255,0,0,0.15); border-color: rgba(255,0,0,0.4); color: #ff4444; }
 .btn-nav-xhs { background: #FF2442 !important; border-color: #FF2442 !important; color: white !important; }
 .btn-nav-xhs:hover { background: #e01a35 !important; border-color: #e01a35 !important; }
+.xhs-search-label { font-size: 12px; color: rgba(255,255,255,0.6); white-space: nowrap; font-family: 'Inter', sans-serif; }
 .xhs-icon {
   font-family: 'Noto Sans SC', sans-serif;
   font-weight: 900;
