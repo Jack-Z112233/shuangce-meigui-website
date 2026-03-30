@@ -843,6 +843,7 @@ img { display: block; max-width: 100%; }
   color: rgba(255,255,255,0.35);
   font-size: 13px;
   line-height: 1.6;
+  margin-bottom: 16px;
 }
 .discord-coming-soon strong { color: rgba(255,255,255,0.6); display: block; margin-bottom: 4px; font-size: 14px; }
 
@@ -851,6 +852,7 @@ img { display: block; max-width: 100%; }
   gap: 12px;
   justify-content: center;
   flex-wrap: wrap;
+  margin-top: 32px;
 }
 .community-cta .btn-discord-hero,
 .community-cta .btn-outline {
