@@ -290,8 +290,7 @@ if (xhsBtn) {
       return `
         <div class="video-card${i === 0 ? ' featured' : ''}" data-vid="${vid}" style="cursor:pointer">
           <div class="video-thumb">
-            <img src="https://img.youtube.com/vi/${vid}/maxresdefault.jpg" alt="${esc(title)}" class="thumb-img"
-                 onerror="this.src='https://img.youtube.com/vi/${vid}/hqdefault.jpg'"/>
+            <img src="https://i.ytimg.com/vi/${vid}/hqdefault.jpg" alt="${esc(title)}" class="thumb-img"/>
             <div class="play-btn"><svg viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg></div>
             ${i === 0 ? '<div class="video-badge">最新</div>' : ''}
             ${duration ? `<div class="video-duration">${duration}</div>` : ''}
