@@ -852,7 +852,7 @@ img { display: block; max-width: 100%; }
   gap: 12px;
   justify-content: center;
   flex-wrap: wrap;
-  margin-top: 32px;
+  margin-top: 48px;
 }
 .community-cta .btn-discord-hero,
 .community-cta .btn-outline {
