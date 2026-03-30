@@ -241,12 +241,11 @@ if (xhsBtn) {
     const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
     if (isMobile) {
       e.preventDefault();
-      // Try to open the app; fall back to web after 1.5s if app not installed
       const appUrl = 'xhsdiscover://user/profile/26136486704';
       const webUrl = 'https://www.xiaohongshu.com/user/profile/26136486704';
-      const fallback = setTimeout(() => { window.open(webUrl, '_blank'); }, 1500);
-      window.location.href = appUrl;
+      const fallback = setTimeout(() => { window.location.href = webUrl; }, 1500);
       window.addEventListener('blur', () => clearTimeout(fallback), { once: true });
+      window.location.href = appUrl;
     }
     // desktop: default href opens web link
   });
