@@ -384,6 +384,7 @@ if (hero) {
 (function () {
   const translations = {
     zh: {
+      'logo-text': '双侧玩美股',
       'nav-about': '关于',
       'nav-videos': '视频',
       'nav-community': '社区',
@@ -458,12 +459,13 @@ if (hero) {
       'footer-copy': '© 2025 双侧玩美股 · Daniel Wu · All rights reserved',
     },
     en: {
+      'logo-text': 'Dualpha',
       'nav-about': 'About',
       'nav-videos': 'Videos',
       'nav-community': 'Community',
       'nav-discord': 'Join',
       'hero-badge': 'Live Trader',
-      'hero-title': 'Daniel Wu<span class="accent"> Trades</span>',
+      'hero-title': '<span class="accent">Dualpha</span>',
       'hero-sub': 'Live Trades · Daily Recaps · Long & Short · Real-Time<br/>Understanding US Markets Together',
       'stat-subscribers': 'Subscribers',
       'stat-videos': 'Videos',
@@ -474,7 +476,7 @@ if (hero) {
       'scroll-hint': 'Scroll Down',
       'about-label': 'About',
       'about-title': 'Real Account,<br/><span class="accent">Transparent Trading</span>',
-      'about-p1': 'Daniel Wu Trades is a channel dedicated to live US stock trading. Daniel posts daily recap videos, openly sharing his account positions and the real logic behind every trade.',
+      'about-p1': 'Dualpha is a channel dedicated to live US stock trading. Daniel posts daily recap videos, openly sharing his account positions and the real logic behind every trade.',
       'about-p2': 'From individual stock analysis to macro market reads, short-term swings to long-term positions — every move is documented transparently in real time.',
       'feature-1-title': 'Daily Recap',
       'feature-1-desc': 'Open account positions, daily video trading summaries',
@@ -529,7 +531,7 @@ if (hero) {
       'footer-partners-title': 'Partners',
       'footer-seeking': 'Seeking Alpha (7-Day Free Trial)',
       'footer-longbridge': 'Longbridge HK Brokerage',
-      'footer-copy': '© 2025 Daniel Wu Trades · All rights reserved',
+      'footer-copy': '© 2025 Dualpha · Daniel Wu · All rights reserved',
     },
   };
 
@@ -547,6 +549,7 @@ if (hero) {
       if (t[key] !== undefined) el.innerHTML = t[key];
     });
     document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
+    document.title = lang === 'zh' ? '双侧玩美股 | Daniel Wu' : 'Dualpha | Daniel Wu';
     localStorage.setItem('lang', lang);
     const btn = document.getElementById('langToggle');
     if (btn) btn.textContent = lang === 'zh' ? 'EN' : '中';
