@@ -382,6 +382,9 @@ if (hero) {
    LANGUAGE TOGGLE (中 / EN)
    ============================================================ */
 (function () {
+  // TODO: replace with Dualpha YouTube channel URL when ready
+  const DUALPHA_YT = 'https://www.youtube.com/@Dualpha';
+  const DANIEL_YT  = 'https://www.youtube.com/@DanielWu-d1q';
   const translations = {
     zh: {
       'logo-text': '双侧玩美股',
@@ -550,6 +553,14 @@ if (hero) {
     });
     document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
     document.title = lang === 'zh' ? '双侧玩美股 | Daniel Wu' : 'Dualpha';
+    // Swap all YouTube channel links between 双侧玩美股 and Dualpha
+    const fromYT = lang === 'en' ? DANIEL_YT : DUALPHA_YT;
+    const toYT   = lang === 'en' ? DUALPHA_YT : DANIEL_YT;
+    document.querySelectorAll('a[href^="https://www.youtube.com"]').forEach(a => {
+      if (a.href.startsWith(fromYT)) {
+        a.href = toYT + a.href.slice(fromYT.length);
+      }
+    });
     localStorage.setItem('lang', lang);
     const btn = document.getElementById('langToggle');
     if (btn) btn.textContent = lang === 'zh' ? 'EN' : '中';
