@@ -204,6 +204,34 @@ img { display: block; max-width: 100%; }
   transition: var(--transition);
 }
 .nav-links a:hover { color: white; }
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.lang-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 28px;
+  background: transparent;
+  border: 1.5px solid rgba(255,255,255,0.22);
+  border-radius: 6px;
+  color: rgba(255,255,255,0.6);
+  font-size: 12px;
+  font-weight: 700;
+  font-family: 'Inter', sans-serif;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  transition: var(--transition);
+  flex-shrink: 0;
+}
+.lang-toggle:hover {
+  border-color: white;
+  color: white;
+  background: rgba(255,255,255,0.06);
+}
 .hamburger {
   display: none;
   flex-direction: column;

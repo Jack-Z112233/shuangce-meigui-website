@@ -377,3 +377,186 @@ if (hero) {
   `;
   document.head.appendChild(style);
 }
+
+/* ============================================================
+   LANGUAGE TOGGLE (中 / EN)
+   ============================================================ */
+(function () {
+  const translations = {
+    zh: {
+      'nav-about': '关于',
+      'nav-videos': '视频',
+      'nav-community': '社区',
+      'nav-discord': '加入社区',
+      'hero-badge': '全实盘博主',
+      'hero-title': '双侧玩<span class="accent">美股</span>',
+      'hero-sub': '实盘记录 · 每日复盘 · 双向交易 · 实时交易<br/>与你一起读懂美国股市',
+      'stat-subscribers': '订阅者',
+      'stat-videos': '视频',
+      'stat-freq': '复盘频率',
+      'stat-daily': '日更',
+      'hero-discord-main': '加入 Discord',
+      'hero-discord-sub': '订阅获取实时交易更新',
+      'scroll-hint': '向下滚动',
+      'about-label': '关于频道',
+      'about-title': '真实账户<br/><span class="accent">透明操盘</span>',
+      'about-p1': '双侧玩美股是一个专注于美国股市实盘交易的中文频道。Daniel 坚持每日更新复盘视频，公开账户操作记录，分享真实的交易逻辑与风险控制心得。',
+      'about-p2': '无论是个股深度分析、宏观市场解读，还是中短线波段与中长线布局，这里都有最真实、最透明的一手实盘记录。',
+      'feature-1-title': '每日复盘',
+      'feature-1-desc': '公开账户持仓，每日视频更新交易总结',
+      'feature-2-title': '双向交易',
+      'feature-2-desc': '多空双侧操作，把握涨跌两端机会',
+      'feature-3-title': '个股分析',
+      'feature-3-desc': 'TSLA、BABA、半导体等热门标的深度解析',
+      'profile-tag-1': '实盘交易',
+      'profile-tag-2': '双向操作',
+      'profile-tag-3': '美股研究',
+      'community-label': '加入社区',
+      'community-title': '实时交流，共同成长',
+      'community-p': '加入 Discord 社群，第一时间获取 Daniel 的实盘买卖操作更新——每一笔开仓、加仓、止盈止损都会实时推送，让你跟上每一个交易机会。同时享有一对一答疑与每周定期直播。',
+      'ch-cat-1': '📊 交易频道',
+      'ch-1-name': 'daniel的市场想法',
+      'ch-1-desc': 'Daniel 每日亲自分享市场观点与交易逻辑',
+      'ch-2-name': '中短线交易 · 实时更新',
+      'ch-2-desc': '中短线开仓、加仓、止盈止损第一时间推送',
+      'ch-3-name': '中长线交易 · 实时更新',
+      'ch-3-desc': '中长线布局与持仓变动实时同步',
+      'ch-4-name': '群友突破分享',
+      'ch-4-desc': '群友发掘的潜力好股，集思广益共同寻找机会',
+      'ch-5-name': '市场新闻与帐户更新',
+      'ch-5-desc': '重要财经新闻与账户持仓变动即时播报',
+      'ch-cat-2': '💬 交流区',
+      'ch-6-name': '提问区',
+      'ch-6-desc': '任何交易问题，Daniel 亲自一对一解答',
+      'ch-7-name': '闲聊聊',
+      'ch-7-desc': '与数百位志同道合的交易者自由交流，共同进步',
+      'coming-soon': '🚀 更多功能持续进化中',
+      'coming-soon-text': '量化交易指标、自动信号推送等高阶功能正在开发，敬请期待',
+      'community-cta-discord': '加入 Discord 社群',
+      'community-cta-yt': '订阅 YouTube 频道',
+      'videos-label': '最新内容',
+      'videos-title': '热门视频',
+      'videos-desc': '精选近期高播放量视频，覆盖市场热点与实盘操作',
+      'videos-cta': '查看全部125个视频 →',
+      'playlists-label': '系列内容',
+      'playlists-title': '精选播放列表',
+      'pl-1-title': '日更复盘和交易总结',
+      'pl-1-desc': '每日公开账户操作，实时跟踪持仓变化与市场解读',
+      'pl-2-title': '交易及投资干货，必看！',
+      'pl-2-desc': '精华交易方法论，从入门到进阶的核心知识',
+      'pl-3-title': '个股分析',
+      'pl-3-desc': 'TSLA、BABA、半导体深度研究，挖掘潜力标的',
+      'pl-link': '查看系列 →',
+      'disclaimer': '⚠️ 免责声明：本频道仅用于分享投资经验，不作为任何个人、机构、法律、税务或会计顾问等投资建议。投资有风险，交易需谨慎。',
+      'footer-brand-desc': '实盘记录美股交易，分享真实操作逻辑',
+      'footer-links-title': '快速链接',
+      'footer-yt': 'YouTube 频道',
+      'footer-discord': 'Discord 社群',
+      'footer-partners-title': '合作伙伴',
+      'footer-seeking': 'Seeking Alpha（7天免费试用）',
+      'footer-longbridge': '长桥港美股开户（HK）',
+      'footer-copy': '© 2025 双侧玩美股 · Daniel Wu · All rights reserved',
+    },
+    en: {
+      'nav-about': 'About',
+      'nav-videos': 'Videos',
+      'nav-community': 'Community',
+      'nav-discord': 'Join',
+      'hero-badge': 'Live Trader',
+      'hero-title': 'Daniel Wu<span class="accent"> Trades</span>',
+      'hero-sub': 'Live Trades · Daily Recaps · Long & Short · Real-Time<br/>Understanding US Markets Together',
+      'stat-subscribers': 'Subscribers',
+      'stat-videos': 'Videos',
+      'stat-freq': 'Update Rate',
+      'stat-daily': 'Daily',
+      'hero-discord-main': 'Join Discord',
+      'hero-discord-sub': 'Get real-time trade updates',
+      'scroll-hint': 'Scroll Down',
+      'about-label': 'About',
+      'about-title': 'Real Account,<br/><span class="accent">Transparent Trading</span>',
+      'about-p1': 'Daniel Wu Trades is a channel dedicated to live US stock trading. Daniel posts daily recap videos, openly sharing his account positions and the real logic behind every trade.',
+      'about-p2': 'From individual stock analysis to macro market reads, short-term swings to long-term positions — every move is documented transparently in real time.',
+      'feature-1-title': 'Daily Recap',
+      'feature-1-desc': 'Open account positions, daily video trading summaries',
+      'feature-2-title': 'Long & Short',
+      'feature-2-desc': 'Trading both sides — capturing opportunities in up and down markets',
+      'feature-3-title': 'Stock Analysis',
+      'feature-3-desc': 'Deep dives into TSLA, BABA, semiconductors, and more',
+      'profile-tag-1': 'Live Trading',
+      'profile-tag-2': 'Long & Short',
+      'profile-tag-3': 'US Stocks',
+      'community-label': 'Community',
+      'community-title': 'Real-Time Updates, Together',
+      'community-p': 'Join the Discord — every entry, add, take profit, and stop loss from Daniel\'s live account is posted in real time. Never miss a trade. Plus 1-on-1 Q&A and weekly live streams.',
+      'ch-cat-1': '📊 Trading Channels',
+      'ch-1-name': "daniel's market thoughts",
+      'ch-1-desc': "Daniel's daily market commentary and trade rationale",
+      'ch-2-name': 'swing trades · live',
+      'ch-2-desc': 'Real-time swing trade entries, adds, profits & stops',
+      'ch-3-name': 'position trades · live',
+      'ch-3-desc': 'Long-term positioning and portfolio changes in real time',
+      'ch-4-name': 'member stock picks',
+      'ch-4-desc': 'Breakout opportunities discovered and shared by members',
+      'ch-5-name': 'market news & updates',
+      'ch-5-desc': 'Key financial news and account changes as they happen',
+      'ch-cat-2': '💬 Discussion',
+      'ch-6-name': 'q&a',
+      'ch-6-desc': 'Ask Daniel anything — he answers every question personally',
+      'ch-7-name': 'general chat',
+      'ch-7-desc': 'Free discussion with hundreds of like-minded traders',
+      'coming-soon': '🚀 More Features Coming',
+      'coming-soon-text': 'Quantitative indicators, automated trade signals, and more — in development',
+      'community-cta-discord': 'Join Discord Community',
+      'community-cta-yt': 'Subscribe on YouTube',
+      'videos-label': 'Latest',
+      'videos-title': 'Latest Videos',
+      'videos-desc': 'Recent high-view videos covering market moves and live trades',
+      'videos-cta': 'View All 125 Videos →',
+      'playlists-label': 'Series',
+      'playlists-title': 'Playlists',
+      'pl-1-title': 'Daily Recap & Trade Summary',
+      'pl-1-desc': 'Daily account activity — tracking positions and market analysis in real time',
+      'pl-2-title': 'Trading & Investing Essentials',
+      'pl-2-desc': 'Core trading methodology, from beginner to advanced',
+      'pl-3-title': 'Stock Analysis',
+      'pl-3-desc': 'Deep research on TSLA, BABA, semiconductors, and more',
+      'pl-link': 'View Series →',
+      'disclaimer': '⚠️ Disclaimer: This channel is for educational purposes only and does not constitute investment, legal, tax, or accounting advice. All trading involves risk — invest responsibly.',
+      'footer-brand-desc': 'Documenting live US stock trades & sharing real trading logic',
+      'footer-links-title': 'Quick Links',
+      'footer-yt': 'YouTube Channel',
+      'footer-discord': 'Discord Community',
+      'footer-partners-title': 'Partners',
+      'footer-seeking': 'Seeking Alpha (7-Day Free Trial)',
+      'footer-longbridge': 'Longbridge HK Brokerage',
+      'footer-copy': '© 2025 Daniel Wu Trades · All rights reserved',
+    },
+  };
+
+  // Keys that contain HTML (use innerHTML instead of textContent)
+  const htmlKeys = new Set(['hero-title', 'hero-sub', 'about-title']);
+
+  function applyLang(lang) {
+    const t = translations[lang];
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.getAttribute('data-i18n');
+      if (t[key] !== undefined) el.textContent = t[key];
+    });
+    document.querySelectorAll('[data-i18n-html]').forEach(el => {
+      const key = el.getAttribute('data-i18n-html');
+      if (t[key] !== undefined) el.innerHTML = t[key];
+    });
+    document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
+    localStorage.setItem('lang', lang);
+    const btn = document.getElementById('langToggle');
+    if (btn) btn.textContent = lang === 'zh' ? 'EN' : '中';
+  }
+
+  const savedLang = localStorage.getItem('lang') || 'zh';
+  applyLang(savedLang);
+
+  document.getElementById('langToggle')?.addEventListener('click', function () {
+    const current = localStorage.getItem('lang') || 'zh';
+    applyLang(current === 'zh' ? 'en' : 'zh');
+  });
+})();
