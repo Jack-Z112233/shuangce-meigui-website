@@ -531,7 +531,7 @@ if (hero) {
       'footer-partners-title': 'Partners',
       'footer-seeking': 'Seeking Alpha (7-Day Free Trial)',
       'footer-longbridge': 'Longbridge HK Brokerage',
-      'footer-copy': '© 2025 Dualpha · Daniel Wu · All rights reserved',
+      'footer-copy': '© 2025 Dualpha · All rights reserved',
     },
   };
 
@@ -549,7 +549,7 @@ if (hero) {
       if (t[key] !== undefined) el.innerHTML = t[key];
     });
     document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
-    document.title = lang === 'zh' ? '双侧玩美股 | Daniel Wu' : 'Dualpha | Daniel Wu';
+    document.title = lang === 'zh' ? '双侧玩美股 | Daniel Wu' : 'Dualpha';
     localStorage.setItem('lang', lang);
     const btn = document.getElementById('langToggle');
     if (btn) btn.textContent = lang === 'zh' ? 'EN' : '中';
